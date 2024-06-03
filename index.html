@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sorting Algorithm Visualization</h1>
+        </header>
+        <div class="controls">
+            <label for="algorithm-select">Select Algorithm:</label>
+            <select id="algorithm-select">
+                <option value="bubble">Bubble Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="insertion">Insertion Sort</option>
+            </select>
+            <label for="array-size">Array Size:</label>
+            <input type="number" id="array-size" min="1" max="100" value="50">
+            <label for="speed-range">Speed:</label>
+            <input type="range" id="speed-range" min="1" max="1000" value="500" style="transform: scaleX(-1);">
+            <button id="start-btn">Start Sorting</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        <div id="bars-container" class="bars-container"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

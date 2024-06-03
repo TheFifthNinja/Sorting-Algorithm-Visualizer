@@ -1,0 +1,153 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    /* Background color for the entire page */
+}
+
+.container {
+    max-width: 800px;
+    /* Maximum width of the container */
+    margin: 0 auto;
+    /* Center the container horizontally */
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+    /* Header text color */
+}
+
+/* Controls section styles */
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls label {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #333;
+    /* Label text color */
+}
+
+.controls select,
+.controls input[type="number"],
+.controls input[type="range"],
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid dodgerblue;
+    /* Border color for input elements */
+    border-radius: 5px;
+    background-color: #fff;
+    /* Background color for input elements */
+    color: dodgerblue;
+    /* Text color for input elements */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.controls input[type="range"] {
+    /* Update range input style */
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+    /* Update slider thumb style for WebKit browsers */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: dodgerblue;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.controls input[type="range"]::-moz-range-thumb {
+    /* Update slider thumb style for Firefox */
+    width: 20px;
+    height: 20px;
+    background-color: dodgerblue;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.controls select:focus,
+.controls input[type="number"]:focus,
+.controls input[type="range"]:focus,
+.controls button:focus {
+    outline: none;
+    border-color: royalblue;
+    /* Border color when element is focused */
+}
+
+.controls button:hover {
+    background-color: royalblue;
+    /* Background color on button hover */
+    color: #fff;
+    /* Text color on button hover */
+}
+
+
+/* Bars container styles */
+.bars-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 300px;
+    /* Height of the bars container */
+}
+
+.bar {
+    width: 10px;
+    /* Width of each bar */
+    margin: 0 1px;
+    background-color: dodgerblue;
+    /* Default color of bars */
+    transition: height 0.2s, background-color 0.3s;
+    /* Smooth transition for height and background-color changes */
+}
+
+/* Animation for bars */
+@keyframes color-change {
+    0% {
+        background-color: dodgerblue;
+    }
+
+    50% {
+        background-color: orange;
+    }
+
+    100% {
+        background-color: dodgerblue;
+    }
+}
+
+/* Apply animation to bars */
+.bar {
+    animation: color-change 2s infinite;
+    /* Apply color-change animation to bars */
+}
