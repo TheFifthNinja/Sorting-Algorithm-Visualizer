@@ -1,12 +1,10 @@
 let continueSorting = true;
-let selectedAlgorithm = 'bubble'; // Default algorithm
+let selectedAlgorithm = 'bubble';
 
-// Event listener for the input field for array size
 document.getElementById('array-size').addEventListener('input', updateDefaultArray);
 
-// Function to generate a default random array of numbers when the page loads
 window.addEventListener('load', () => {
-    const defaultArraySize = 50; // Default size of the array
+    const defaultArraySize = 50;
     const minValue = 1;
     const maxValue = 100;
     const defaultArray = generateRandomArray(defaultArraySize, minValue, maxValue);
@@ -14,7 +12,6 @@ window.addEventListener('load', () => {
     selectedAlgorithm = null;
 });
 
-// Function to generate a random color in hexadecimal format
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -24,7 +21,6 @@ function getRandomColor() {
     return color;
 }
 
-// Function to update the background with random colors
 function updateBackground() {
     const body = document.body;
     const color1 = getRandomColor();
@@ -32,11 +28,9 @@ function updateBackground() {
     body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
 }
 
-// Call the updateBackground function initially and then every few seconds
 updateBackground();
-setInterval(updateBackground, 5000); // Update every 10 seconds
+setInterval(updateBackground, 5000);
 
-// Function to generate a default random array of numbers based on the current array size value
 function updateDefaultArray() {
     const arraySize = parseInt(document.getElementById('array-size').value);
     const minValue = 1;
@@ -45,7 +39,6 @@ function updateDefaultArray() {
     visualizeArray(defaultArray);
 }
 
-// Function to visualize the array as bars
 function visualizeArray(array, highlightIndex = -1) {
     const container = document.getElementById('bars-container');
     container.innerHTML = '';
@@ -55,12 +48,11 @@ function visualizeArray(array, highlightIndex = -1) {
         if (index === highlightIndex) {
             bar.classList.add('highlight');
         }
-        bar.style.height = value * 3 + 'px'; // Adjust height multiplier as needed
+        bar.style.height = value * 3 + 'px';
         container.appendChild(bar);
     });
 }
 
-// Function to generate an array of random numbers
 function generateRandomArray(size, min, max) {
     let array = [];
     for (let i = 0; i < size; i++) {
@@ -69,69 +61,61 @@ function generateRandomArray(size, min, max) {
     return array;
 }
 
-// Bubble Sort algorithm
 async function bubbleSort(array, speed) {
     const n = array.length;
     let swapped;
     do {
         swapped = false;
         for (let i = 0; i < n - 1; i++) {
-            visualizeArray(array, i); // Highlight the current bar
+            visualizeArray(array, i);
             if (array[i] > array[i + 1]) {
-                // Swap array[i] and array[i+1]
                 let temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
                 swapped = true;
-                // Visualize the swap
                 visualizeArray(array, i + 1);
-                await new Promise(resolve => setTimeout(resolve, speed)); // Delay for visualization
-                if (!continueSorting) return; // Check if sorting should continue
+                await new Promise(resolve => setTimeout(resolve, speed));
+                if (!continueSorting) return;
             }
         }
     } while (swapped && continueSorting);
 }
 
-// Selection Sort algorithm
 async function selectionSort(array, speed) {
     const n = array.length;
-    for (let i = 0; i < n - 1 && continueSorting; i++) { // Check continueSorting in loop condition
+    for (let i = 0; i < n - 1 && continueSorting; i++) {
         let minIndex = i;
         for (let j = i + 1; j < n; j++) {
-            visualizeArray(array, j); // Highlight the current bar
+            visualizeArray(array, j);
             if (array[j] < array[minIndex]) {
                 minIndex = j;
             }
         }
         if (minIndex !== i) {
-            // Swap array[i] and array[minIndex]
             let temp = array[i];
             array[i] = array[minIndex];
             array[minIndex] = temp;
-            // Visualize the swap
             visualizeArray(array, minIndex);
-            await new Promise(resolve => setTimeout(resolve, speed)); // Delay for visualization
-            if (!continueSorting) return; // Check if sorting should continue
+            await new Promise(resolve => setTimeout(resolve, speed));
+            if (!continueSorting) return;
         }
     }
 }
 
-// Insertion Sort algorithm
 async function insertionSort(array, speed) {
     const n = array.length;
-    for (let i = 1; i < n && continueSorting; i++) { // Check continueSorting in loop condition
+    for (let i = 1; i < n && continueSorting; i++) {
         let key = array[i];
         let j = i - 1;
-        visualizeArray(array, i); // Highlight the current bar
+        visualizeArray(array, i);
         while (j >= 0 && array[j] > key) {
             array[j + 1] = array[j];
             j--;
         }
         array[j + 1] = key;
-        // Visualize the swap
         visualizeArray(array, j + 1);
-        await new Promise(resolve => setTimeout(resolve, speed)); // Delay for visualization
-        if (!continueSorting) return; // Check if sorting should continue
+        await new Promise(resolve => setTimeout(resolve, speed));
+        if (!continueSorting) return;
     }
 }
 
@@ -163,7 +147,7 @@ async function merge(leftArray, rightArray, speed) {
             rightIndex++;
         }
         visualizeMerge(leftArray, rightArray, resultArray, leftIndex, rightIndex);
-        await new Promise(resolve => setTimeout(resolve, speed)); // Delay for visualization
+        await new Promise(resolve => setTimeout(resolve, speed));
         if (!continueSorting) return;
     }
 
@@ -195,16 +179,16 @@ async function quickSort(array, speed, start = 0, end = array.length - 1) {
 async function partition(array, speed, start, end) {
     let pivotIndex = start;
     let pivotValue = array[end];
-    visualizeArray(array, pivotIndex); // Highlight the pivot element
+    visualizeArray(array, pivotIndex);
 
     for (let i = start; i < end; i++) {
         if (!continueSorting) return;
 
-        visualizeArray(array, i); // Highlight the current bar
+        visualizeArray(array, i);
 
         if (array[i] < pivotValue) {
             await swap(array, i, pivotIndex, speed);
-            visualizeArray(array, pivotIndex); // Highlight the pivot after swapping
+            visualizeArray(array, pivotIndex);
             pivotIndex++;
         }
     }
@@ -216,26 +200,24 @@ async function swap(array, leftIndex, rightIndex, speed) {
     let temp = array[leftIndex];
     array[leftIndex] = array[rightIndex];
     array[rightIndex] = temp;
-    visualizeArray(array, leftIndex); // Highlight the leftIndex element after swapping
-    visualizeArray(array, rightIndex); // Highlight the rightIndex element after swapping
-    await new Promise(resolve => setTimeout(resolve, speed)); // Delay for visualization
+    visualizeArray(array, leftIndex);
+    visualizeArray(array, rightIndex);
+    await new Promise(resolve => setTimeout(resolve, speed));
 }
 
 
-// Function to get the selected speed from the range input
 function getSpeed() {
     const speedRange = document.getElementById('speed-range');
-    return parseInt(speedRange.value) * 10; // Convert the value to an integer
+    return parseInt(speedRange.value) * 10;
 }
 
-// Function to start the sorting process
 async function startSorting(speed, array) {
     if (!selectedAlgorithm) {
         alert("Please select a sorting algorithm.");
         return;
     }
     const startBtn = document.getElementById('start-btn');
-    startBtn.disabled = true; // Disable the button
+    startBtn.disabled = true;
 
     switch (selectedAlgorithm) {
         case 'bubble':
@@ -253,14 +235,12 @@ async function startSorting(speed, array) {
         case 'quick':
             await quickSort(array, speed);
             break;
-        // Add cases for other sorting algorithms if needed
     }
-    document.getElementById('start-btn').disabled = false; // Re-enable the button after sorting
+    document.getElementById('start-btn').disabled = false;
 }
 
 const arraySizeInput = document.getElementById('array-size');
 
-// Add event listener to restrict input value
 arraySizeInput.addEventListener('input', () => {
     const maxValue = parseInt(arraySizeInput.getAttribute('max'));
     if (parseInt(arraySizeInput.value) > maxValue) {
@@ -268,7 +248,6 @@ arraySizeInput.addEventListener('input', () => {
     }
 });
 
-// Event listener for the algorithm buttons
 document.querySelectorAll('.algorithm-btn').forEach(button => {
     button.addEventListener('click', () => {
         document.querySelectorAll('.algorithm-btn').forEach(btn => btn.classList.remove('active'));
@@ -277,12 +256,10 @@ document.querySelectorAll('.algorithm-btn').forEach(button => {
     });
 });
 
-// Event listener for the "Reset" button
 document.getElementById('reset-btn').addEventListener('click', () => {
-    window.location.reload(); // Reload the page
+    window.location.reload();
 });
 
-// Event listener for the "Start Sorting" button
 document.getElementById('start-btn').addEventListener('click', async () => {
     const arraySize = parseInt(document.getElementById('array-size').value);
     if (arraySize > 100 && selectedAlgorithm === 'selection') {
@@ -290,12 +267,11 @@ document.getElementById('start-btn').addEventListener('click', async () => {
         return;
     }
 
-    const speed = getSpeed(); // Get the speed from the range input
+    const speed = getSpeed();
     const minValue = 1;
     const maxValue = 100;
     const array = generateRandomArray(arraySize, minValue, maxValue);
-    visualizeArray(array); // Display the initial array
-    await startSorting(speed, array); // Pass the speed and array to the startSorting function
+    visualizeArray(array);
+    await startSorting(speed, array);
 });
-
 
