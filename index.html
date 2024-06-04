@@ -13,13 +13,14 @@
         <header>
             <h1>Sorting Algorithm Visualization</h1>
         </header>
+        <div id="bars-container" class="bars-container"></div>
         <div class="controls">
-            <label for="algorithm-select">Select Algorithm:</label>
-            <select id="algorithm-select">
-                <option value="bubble">Bubble Sort</option>
-                <option value="selection">Selection Sort</option>
-                <option value="insertion">Insertion Sort</option>
-            </select>
+            <label>Select Algorithm:</label>
+            <button class="algorithm-btn" data-algorithm="bubble">Bubble Sort</button>
+            <button class="algorithm-btn" data-algorithm="selection">Selection Sort</button>
+            <button class="algorithm-btn" data-algorithm="insertion">Insertion Sort</button>
+            <button class="algorithm-btn" data-algorithm="merge">Merge Sort</button>
+            <button class="algorithm-btn" data-algorithm="quick">Quick Sort</button>
             <label for="array-size">Array Size:</label>
             <input type="number" id="array-size" min="1" max="100" value="50">
             <label for="speed-range">Speed:</label>
@@ -27,7 +28,6 @@
             <button id="start-btn">Start Sorting</button>
             <button id="reset-btn">Reset</button>
         </div>
-        <div id="bars-container" class="bars-container"></div>
     </div>
     <script src="script.js"></script>
 </body>
