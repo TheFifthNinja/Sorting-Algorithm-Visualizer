@@ -225,7 +225,7 @@ async function swap(array, leftIndex, rightIndex, speed) {
 // Function to get the selected speed from the range input
 function getSpeed() {
     const speedRange = document.getElementById('speed-range');
-    return parseInt(speedRange.value); // Convert the value to an integer
+    return parseInt(speedRange.value) * 10; // Convert the value to an integer
 }
 
 // Function to start the sorting process
@@ -258,6 +258,15 @@ async function startSorting(speed, array) {
     document.getElementById('start-btn').disabled = false; // Re-enable the button after sorting
 }
 
+const arraySizeInput = document.getElementById('array-size');
+
+// Add event listener to restrict input value
+arraySizeInput.addEventListener('input', () => {
+    const maxValue = parseInt(arraySizeInput.getAttribute('max'));
+    if (parseInt(arraySizeInput.value) > maxValue) {
+        arraySizeInput.value = maxValue;
+    }
+});
 
 // Event listener for the algorithm buttons
 document.querySelectorAll('.algorithm-btn').forEach(button => {
@@ -275,12 +284,18 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
 // Event listener for the "Start Sorting" button
 document.getElementById('start-btn').addEventListener('click', async () => {
+    const arraySize = parseInt(document.getElementById('array-size').value);
+    if (arraySize > 100 && selectedAlgorithm === 'selection') {
+        alert("Selection sort is disabled for array sizes greater than 100.");
+        return;
+    }
 
     const speed = getSpeed(); // Get the speed from the range input
-    const arraySize = parseInt(document.getElementById('array-size').value);
     const minValue = 1;
     const maxValue = 100;
     const array = generateRandomArray(arraySize, minValue, maxValue);
     visualizeArray(array); // Display the initial array
     await startSorting(speed, array); // Pass the speed and array to the startSorting function
 });
+
+
