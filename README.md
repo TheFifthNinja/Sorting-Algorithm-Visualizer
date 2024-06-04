@@ -3,7 +3,7 @@
 Sorting Visualizer is a web application that visualizes various sorting algorithms in action. It provides an interactive way to understand how sorting algorithms work by animating the sorting process on a set of bars representing array elements.
 
 ## How to Use
-Visit: 
+Visit: https://thefifthninja.github.io/Sorting-Algorithm-Visualizer/
 
 ## Features
 
