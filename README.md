@@ -16,4 +16,3 @@ Visit: https://thefifthninja.github.io/Sorting-Algorithm-Visualizer/
 
 - HTML/CSS/JavaScript: Frontend development
 - CSS Animations: Animated background gradient
-- Web APIs: Used for DOM manipulation and event handling
